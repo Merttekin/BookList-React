@@ -31,7 +31,7 @@ class Detail extends Component {
         //     </div>
         // )
         return (
-            <div className="wrapper">
+            <div className="wrapper details">
                 {/* <h2>{`Kitap İsmi: ${Name}`}</h2>
 
                 <h3>{`Yazarı: ${writerName}`}</h3>
