@@ -1,0 +1,36 @@
+{
+  "name": "booklist-react",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "^4.0.0-alpha.6",
+    "mdbreact": "^4.8.2",
+    "node-sass": "^4.10.0",
+    "react": "^16.6.1",
+    "react-bootstrap": "^0.32.4",
+    "react-bootstrap-table": "^4.3.1",
+    "react-dom": "^16.6.1",
+    "react-mdl": "^1.11.0",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "2.1.1",
+    "typescript": "^3.1.6"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "css-loader": "^1.0.1"
+  }
+}
