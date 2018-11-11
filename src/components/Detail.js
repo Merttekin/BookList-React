@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Table } from 'react-bootstrap';
 
 class Detail extends Component {
     constructor(props) {
@@ -31,12 +32,27 @@ class Detail extends Component {
         // )
         return (
             <div className="wrapper">
-                <h2>{`Kitap İsmi: ${Name}`}</h2>
+                {/* <h2>{`Kitap İsmi: ${Name}`}</h2>
 
                 <h3>{`Yazarı: ${writerName}`}</h3>
 
-                <h4>{`Yayın Evi: ${Publisher}`}</h4>
-                
+                <h4>{`Yayın Evi: ${Publisher}`}</h4> */}
+                <Table striped bordered condensed hover>
+                    <thead>
+                        <tr>
+                            <th>Kitap İsmi</th>
+                            <th>Yazar</th>
+                            <th>Yayın Evi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{Name}</td>
+                            <td>{writerName}</td>
+                            <td>{Publisher}</td>
+                        </tr>
+                    </tbody>
+                </Table>
             </div>
         )
     }
