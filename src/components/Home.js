@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
+import axios from 'axios';
 
 
 class Home extends Component {
@@ -8,20 +9,24 @@ class Home extends Component {
         super();
         this.state = {
             search: '',
-            datas: []
+            datas: [],
+            isLoading: true
         }
     }
-    
+
     colFormatter = (cell, row) => {
         return (
             <Link to={`/detail/${row.id}`}>Detay</Link>
         )
-      }
+    }
 
     componentDidMount() {
-        fetch('http://5be5d36648c1280013fc3e24.mockapi.io/Books')
-            .then(response => response.json())
-            .then(data => this.setState({ datas: data }));
+        axios.get('http://5be5d36648c1280013fc3e24.mockapi.io/Books')
+            .then(response => response.data)
+            .then(data => this.setState({
+                datas: data,
+                isLoading: false
+            }));
     }
 
     changeHandler = e => {
@@ -47,23 +52,31 @@ class Home extends Component {
             // withFirstAndLast: false //> Hide the going to First and Last page button
         };
 
-        const { datas } = this.state;
+        const { datas, isLoading } = this.state;
 
 
 
-            // let columns = column_meta.map(i => {
-            //     return <TableHeaderColumn dataField={i.columnName} dataFormat={extraFormatter} formatExtraData={i.columnName}>
-            //         {i.displayName}</TableHeaderColumn>
-            //       });
+        // let columns = column_meta.map(i => {
+        //     return <TableHeaderColumn dataField={i.columnName} dataFormat={extraFormatter} formatExtraData={i.columnName}>
+        //         {i.displayName}</TableHeaderColumn>
+        //       });
 
         return (
-            <BootstrapTable data={datas} pagination={true} options={options} striped hover condensed>
-                <TableHeaderColumn dataField='Name' isKey filter={{ type: 'TextFilter', delay: 100, placeholder: 'Kitap Adı Ara' }}>Kitap Adı</TableHeaderColumn>
-                <TableHeaderColumn dataField='writerName' filter={{ type: 'TextFilter', delay: 100, placeholder: 'Yazar Adı Ara' }}>Yazar Adı</TableHeaderColumn>
-                <TableHeaderColumn dataField='Publisher' filter={{ type: 'TextFilter', delay: 100, placeholder: 'Yayın Evi Ara' }}>Yayın Evi</TableHeaderColumn>
-                <TableHeaderColumn dataField='id' dataFormat={ this.colFormatter }>Detay</TableHeaderColumn>
-                {/* <TableHeaderColumn dataField='name' customInsertEditor={ { getElement: this.customNameField } }>Product Name</TableHeaderColumn> */}
-            </BootstrapTable>
+            <div>
+                {isLoading ? 'Loading...' : ''}
+                {
+                    !isLoading ? 
+                    <BootstrapTable data={datas} pagination={true} options={options} striped hover condensed>
+                    <TableHeaderColumn dataField='Name' isKey filter={{ type: 'TextFilter', delay: 100, placeholder: 'Kitap Adı Ara' }}>Kitap Adı</TableHeaderColumn>
+                    <TableHeaderColumn dataField='writerName' filter={{ type: 'TextFilter', delay: 100, placeholder: 'Yazar Adı Ara' }}>Yazar Adı</TableHeaderColumn>
+                    <TableHeaderColumn dataField='Publisher' filter={{ type: 'TextFilter', delay: 100, placeholder: 'Yayın Evi Ara' }}>Yayın Evi</TableHeaderColumn>
+                    <TableHeaderColumn dataField='id' dataFormat={this.colFormatter}>Detay</TableHeaderColumn>
+                    {/* <TableHeaderColumn dataField='name' customInsertEditor={ { getElement: this.customNameField } }>Product Name</TableHeaderColumn> */}
+                </BootstrapTable> : null
+                }
+                
+            </div>
+
         )
     }
 }
